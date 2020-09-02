@@ -1,0 +1,99 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="admin.master.cs" Inherits="admin" %>
+
+<%@ Register Src="~/controls/navbar.ascx" TagName="navbar" TagPrefix="sc" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>eLoi</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="skins/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- MetisMenu CSS -->
+    <link href="skins/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="skins/dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="css/AdminLTE.css" rel="stylesheet" />
+    <!-- Morris Charts CSS -->
+    <link href="skins/vendor/morrisjs/morris.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="skins/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <%--Custom Pagination--%>
+    <link href="css/Pagination.css" rel="stylesheet" type="text/css" />
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body onload="startTime()">
+    <form id="form1" runat="server" enctype="multipart/form-data">
+        <div id="wrapper">
+            <sc:navbar ID="navbar" runat="server" />
+            <div id="page-wrapper">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header"></h1>
+                    </div>
+                </div>
+                <asp:ContentPlaceHolder ID="ContentSection" runat="server"></asp:ContentPlaceHolder>
+                <div style="clear: both;"></div>
+            </div>
+        </div>
+    </form>
+    <!-- jQuery -->
+    <script src="<%=HostUrl%>skins/vendor/jquery/jquery.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="<%=HostUrl%>skins/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="<%=HostUrl%>skins/vendor/metisMenu/metisMenu.min.js"></script>
+    <!-- Morris Charts JavaScript -->
+    <script src="<%=HostUrl%>skins/vendor/raphael/raphael.min.js"></script>
+    <script src="<%=HostUrl%>skins/vendor/morrisjs/morris.min.js"></script>
+    <script src="<%=HostUrl%>skins/data/morris-data.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="<%=HostUrl%>skins/dist/js/sb-admin-2.js"></script>
+
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function () {
+            var title = $('ul.collapse li a.active').attr('data');
+            //if (title == undefined)
+            //    title = $('li a.active').attr('data');
+            //if (title == undefined)
+                title = "LOI Management";
+
+            if ($('h1.page-header').html() == '')
+                $('h1.page-header').html(title);
+        });
+
+        //Time stamp
+        function startTime() {
+            var today = new Date();
+            var d = today.getDate();
+            d = (d < 10 ? '0' : '') + d;
+            var month = today.getMonth() + 1;
+            month = (month < 10 ? '0' : '') + month;
+            var y = today.getFullYear();
+            var h = today.getHours();
+            var m = today.getMinutes();
+            var s = today.getSeconds();
+            m = checkTime(m);
+            s = checkTime(s);
+            document.getElementById('lbltime').innerHTML = d + '/' + month + '/' + y + "  " +
+                h + ":" + m + ":" + s;
+            var t = setTimeout(startTime, 500);
+        }
+        function checkTime(i) {
+            if (i < 10) { i = "0" + i };  // add zero in front of numbers < 10
+            return i;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="login.master.cs" Inherits="login" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>eLoi Login</title>
+    <link href="skins/css/style.css" rel="stylesheet" type="text/css" />
+     <style type="text/css">
+        .messagealert {
+            width: 100%;
+            top: 0px;
+            z-index: 100000;
+            padding: 0;
+            font-size: 14px;
+        }
+    </style>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <div class="centerpage">                
+                <img src="skins/login.png" width= "250px" alt="skinlogo"/>
+                <h1></h1>
+                <form id="form1" runat="server" class="form">
+                <asp:ContentPlaceHolder ID="ContentSection" runat="server">
+                </asp:ContentPlaceHolder>
+                </form>
+                <img src="skins/nokia.png" width= "250px" alt="nokiaicon" />
+            </div>
+        </div>
+        <ul class="bg-bubbles">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+</body> 
+<script src="<%=HostUrl%>skins/vendor/jquery/jquery.min.js"></script> 
+<script src="<%=HostUrl%>skins/vendor/bootstrap/js/bootstrap.min.js"></script> 
+<script src="<%=HostUrl%>skins/js/index.js"></script>
+</html>
