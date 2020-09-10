@@ -870,6 +870,23 @@ namespace eLoi.DataAccess
             return CustomExecuteCommand.ExecuteReaderDT(Command, Connection, "LOIDataAccess:LOI_Overdue", "usp_LOI_Overdue");
         }
 
+
+        public DataTable LOI_Overdue(string projectname)
+        {
+            Command = new SqlCommand("usp_LOI_Overdue", Connection);
+            Command.CommandType = CommandType.StoredProcedure;
+
+            SqlParameter prm_userId = new SqlParameter("@userId", SqlDbType.Int);
+            prm_userId.Value = ContentSession.USERID;
+            Command.Parameters.Add(prm_userId);
+
+            SqlParameter prm_ProjectName = new SqlParameter("@ProjectName", SqlDbType.VarChar, 50);
+            prm_ProjectName.Value = projectname;
+            Command.Parameters.Add(prm_ProjectName);
+
+            return CustomExecuteCommand.ExecuteReaderDT(Command, Connection, "LOIDataAccess:LOI_Overdue", "usp_LOI_Overdue");
+        }
+
         public DataTable master_sow_getList_detail()
         {
             Command = new SqlCommand("usp_master_sow_getList_detail", Connection);

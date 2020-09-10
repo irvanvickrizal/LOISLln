@@ -97,6 +97,7 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentSection" runat="Server">
+    <asp:HiddenField ID="hdnprojectname" runat="server" />
     <div class="clearfix"></div>
     <asp:UpdateProgress ID="upgViewPrgoress" runat="server" DisplayAfter="0" AssociatedUpdatePanelID="up1">
         <ProgressTemplate>
@@ -134,7 +135,7 @@
                                     <ItemTemplate>
                                         <div style="vertical-align: middle;">
                                             <%# Container.DataItemIndex + 1 %>.
-                                        </div>
+                                        </div>  
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:BoundField DataField="workpackageid" HeaderText="workpackageid" />

@@ -214,6 +214,11 @@ namespace eLoi.Controller
             return da.LOI_Overdue();
         }
 
+        public DataTable LOI_Overdue(string ProjectName)
+        {
+            return da.LOI_Overdue(ProjectName);
+        }
+
         public DataTable master_sow_getList_detail()
         {
             return da.master_sow_getList_detail();

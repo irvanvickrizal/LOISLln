@@ -27,6 +27,9 @@ public partial class Dashboard_frmApprovalMU : System.Web.UI.Page
     {
         int RequestId = int.Parse(Request.QueryString["RequestId"]);
         DataTable dt = loiControllerr.LOI_Detail_by_RequestId(RequestId);
+        foreach (DataRow drw in dt.Rows) {
+            hdnprojectname.Value = Convert.ToString(drw["ProjectName"]);
+        }
         gvLOIData.DataSource = dt;
         gvLOIData.PageIndex = pgIndex;
         gvLOIData.DataBind();
@@ -36,11 +39,11 @@ public partial class Dashboard_frmApprovalMU : System.Web.UI.Page
 
     private void BindDataOverdue(int pgIndex = 0)
     {
-        DataTable dt = loiControllerr.LOI_Overdue();
+        DataTable dt = loiControllerr.LOI_Overdue(hdnprojectname.Value);
         gvListLOIOverdue.DataSource = dt;
         gvListLOIOverdue.DataBind();
 
-    }
+    }  
 
     protected void gvLOIData_RowCommand(object sender, GridViewCommandEventArgs e)
     {
