@@ -26,6 +26,8 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Web", "Web\", "{6DAA7543-18
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoiDocumentGenerator", "LoiDocumentGenerator\LoiDocumentGenerator.csproj", "{52C713CD-E10C-4F68-9A9F-54A2786B325E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LOIGeneralScheduler", "LOIGeneralScheduler\LOIGeneralScheduler.csproj", "{22E9D322-486B-4333-9788-ECA1149561F4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +42,10 @@ Global
 		{52C713CD-E10C-4F68-9A9F-54A2786B325E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52C713CD-E10C-4F68-9A9F-54A2786B325E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52C713CD-E10C-4F68-9A9F-54A2786B325E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22E9D322-486B-4333-9788-ECA1149561F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22E9D322-486B-4333-9788-ECA1149561F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22E9D322-486B-4333-9788-ECA1149561F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22E9D322-486B-4333-9788-ECA1149561F4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
