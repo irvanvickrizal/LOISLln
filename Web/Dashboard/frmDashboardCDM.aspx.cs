@@ -16,6 +16,7 @@ public partial class Dashboard_frmDashboardCDM : System.Web.UI.Page
             BindSubcon();
             BindAgenda();
             BindTasklist();
+            BindSummaryCT();
         }
     }
 
@@ -62,5 +63,11 @@ public partial class Dashboard_frmDashboardCDM : System.Web.UI.Page
     {
         BindTasklist();
     }
-    
+
+    private void BindSummaryCT()
+    {
+        gvLOISummary.DataSource = loiControllerr.getLOISummary_Count();
+        gvLOISummary.DataBind();
+
+    }
 }

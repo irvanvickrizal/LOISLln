@@ -111,6 +111,11 @@ namespace eLoi.Controller
         {
             return da.LOI_Update_Approval_Status(RequestId, isApprove, ApproverRole, Reject_Remarks);
         }
+
+        public bool LOI_Update_Approval_Status(int RequestId, bool isApprove, string ApproverRole, string Reject_Remarks,string Note)
+        {
+            return da.LOI_Update_Approval_Status(RequestId, isApprove, ApproverRole, Reject_Remarks,Note);
+        }
         public DataTable ssp_checking_document_getall(int RequestId)
         {
             return da.ssp_checking_document_getall(RequestId);
@@ -365,6 +370,16 @@ namespace eLoi.Controller
         public DataTable getTasklistSummary_Report(int subconid, string DashboardType, string ReqPeriodfrom, string ReqPeriodto, string ApprovePeriodfrom, string ApprovePeriodto)
         {
             return da.getTasklistSummary_Report(subconid, DashboardType, ReqPeriodfrom, ReqPeriodto, ApprovePeriodfrom, ApprovePeriodto);
+        }
+
+        public DataTable getLOISummary_Count()
+        {
+            return da.getLOISummary_Count();
+        }
+
+        public DataTable getLOISummary_Detail()
+        {
+            return da.getLOISummary_Detail();
         }
         public DataTable report_loi_done_detail_getdata(int subconid, string periodfrom, string periodto, string siteid, string cpo, int reqid)
         {

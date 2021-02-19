@@ -6,6 +6,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using eLoi.Controller;
 using System.Data;
+using ClosedXML.Excel;
+using System.IO;
 
 public partial class Dashboard_frmDashboardMU : System.Web.UI.Page
 {
@@ -17,6 +19,7 @@ public partial class Dashboard_frmDashboardMU : System.Web.UI.Page
             BindSubcon();
             BindAgenda();
             BindTasklist();
+            BindSummaryCT();
         }
     }
 
@@ -63,4 +66,40 @@ public partial class Dashboard_frmDashboardMU : System.Web.UI.Page
     {
         BindTasklist();
     }
+
+    private void BindSummaryCT()
+    {
+        gvLOISummary.DataSource = loiControllerr.getLOISummary_Count();
+        gvLOISummary.DataBind();
+    }
+
+
+    private void ExportToExcel(string savename, DataTable dtSource, string sheetname)
+    {
+        dtSource.TableName = sheetname;
+        using (XLWorkbook wb = new XLWorkbook())
+        {
+            wb.Worksheets.Add(dtSource);
+            Response.Clear();
+            Response.Buffer = true;
+            Response.Charset = "";
+            Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            Response.AddHeader("content-disposition", "attachment;filename=" + savename + ".xlsx");
+            using (MemoryStream MyMemoryStream = new MemoryStream())
+            {
+                wb.SaveAs(MyMemoryStream);
+                MyMemoryStream.WriteTo(Response.OutputStream);
+                Response.Flush();
+                Response.End();
+            }
+        }
+    }
+    protected void btnDownloadList_Click(object sender, EventArgs e)
+    {
+        
+        DataTable dtResult = loiControllerr.getLOISummary_Detail();
+               if (dtResult.Rows.Count > 0)
+                        ExportToExcel("LOISummary_" + string.Format("{0:ddMMMyyy}", DateTime.Now), dtResult, GeneralConfig.Def_sheetname);
+    }
+
 }

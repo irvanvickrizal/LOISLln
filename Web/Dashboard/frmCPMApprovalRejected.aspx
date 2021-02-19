@@ -101,6 +101,7 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentSection" runat="Server">
+    <asp:HiddenField ID="hdnprojectname" runat="server" /> <%--Yunita  28 Sep 2020 to show summary LOI overdue--%>
     <div class="clearfix"></div>
     <asp:UpdateProgress ID="upgViewPrgoress" runat="server" DisplayAfter="0" AssociatedUpdatePanelID="up1">
         <ProgressTemplate>
@@ -141,7 +142,12 @@
                                         </div>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:BoundField DataField="workpackageid" HeaderText="workpackageid" />
+                                 <asp:BoundField DataField="loi_code" HeaderText="LOI Request No" /> <%--Yunita 28/09/20 to change overdue detail to summary as requested by user BE--%>
+                                <asp:BoundField DataField="TotalSites" HeaderText="Total Site" />
+                                <asp:BoundField DataField="TotalPrice" HeaderText="Total Price" DataFormatString="{0:n0}" />
+                                <asp:BoundField DataField="Aging" HeaderText="Overdue Aging (Days)" />
+
+                               <%-- <asp:BoundField DataField="workpackageid" HeaderText="workpackageid" />
                                 <asp:BoundField DataField="Customer_PO" HeaderText="Customer PO" />
                                 <asp:BoundField DataField="Customer_PO_Date" HeaderText="Customer PO Date" DataFormatString="{0:dd-MMM-yyyy}"/>
                                 <asp:BoundField DataField="PO_Description" HeaderText="PO Description" />
@@ -153,7 +159,7 @@
                                 <asp:BoundField DataField="Unit_Price" HeaderText="Unit Price" DataFormatString="{0:n0}" />
                                 <asp:BoundField DataField="Qty" HeaderText="Qty" />
                                 <asp:BoundField DataField="Total_Price" HeaderText="Total Price" DataFormatString="{0:n0}" />
-                                <asp:BoundField DataField="Currency" HeaderText="Currency" />
+                                <asp:BoundField DataField="Currency" HeaderText="Currency" />--%>
                             </Columns>
                         </asp:GridView>
                     </div>

@@ -111,15 +111,25 @@ public partial class Dashboard_frmCPMApprovalRejected : System.Web.UI.Page
         gvSupDoc.DataBind();
     }
 
+    //private void BindDataOverdue(int pgIndex = 0)
+    //{
+    //    DataTable dt = loiControllerr.LOI_Overdue();
+    //    gvListLOIOverdue.DataSource = dt;
+    ////    gvListLOIOverdue.DataBind();
+
+    //}
+
+
     private void BindDataOverdue(int pgIndex = 0)
     {
-        DataTable dt = loiControllerr.LOI_Overdue();
+        DataTable dt = loiControllerr.LOI_Overdue(hdnprojectname.Value);
         gvListLOIOverdue.DataSource = dt;
+        gvListLOIOverdue.PageIndex = pgIndex;
         gvListLOIOverdue.DataBind();
-
     }
 
-    protected void gvListLOIOverdue_RowCommand(object sender, GridViewCommandEventArgs e)
+
+        protected void gvListLOIOverdue_RowCommand(object sender, GridViewCommandEventArgs e)
     {
 
     }

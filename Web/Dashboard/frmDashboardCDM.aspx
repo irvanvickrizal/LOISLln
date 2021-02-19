@@ -143,4 +143,34 @@
             </div>
         </div>
     </div>
+    <%--Yunita 24/11/20 add new dashboard Progress Summary Group By CT--%> 
+     <div class="col-sm-8">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <i class="fa fa-bar-chart-o fa-fw"></i>LOI Progress Summary Group by CT                           
+            </div>
+            <div class="panel-body">
+                <div class="col-sm-12">
+                    <div class="form-horizontal">
+                        <asp:GridView ID="gvLOISummary" runat="server" AutoGenerateColumns="false" CssClass="table table-condensed table-bordered" 
+                 EmptyDataText="You have no LOI progress" Font-Size="12px">
+                <HeaderStyle BackColor="#c7c5ff" HorizontalAlign="Center" />
+                <EmptyDataRowStyle CssClass="alert-warning" ForeColor="Red" />
+                <Columns>
+                    <asp:BoundField DataField="ProjectName" HeaderText="Project Name" HeaderStyle-CssClass="gridheader" ItemStyle-HorizontalAlign="Center" />
+                    <asp:BoundField DataField="Total_LOIRequest" HeaderText="LOI Requested" HeaderStyle-CssClass="gridheader" ItemStyle-HorizontalAlign="Center" />
+                    <asp:BoundField DataField="TotalOnProgress" HeaderText="LOI On Progress" HeaderStyle-CssClass="gridheader" ItemStyle-HorizontalAlign="Center" />
+                    <asp:BoundField DataField="TotalRejected" HeaderText="LOI Rejected" HeaderStyle-CssClass="gridheader" ItemStyle-HorizontalAlign="Center" />
+                    <asp:BoundField DataField="TotalOpen" HeaderText="LOI Open" HeaderStyle-CssClass="gridheader" ItemStyle-HorizontalAlign="Center"/>
+                    <asp:BoundField DataField="TotalClosed" HeaderText="LOI Closed" HeaderStyle-CssClass="gridheader" ItemStyle-HorizontalAlign="Center"/>
+                    <asp:BoundField DataField="TotalOverdue" HeaderText="LOI Overdue" HeaderStyle-CssClass="gridheader" ItemStyle-HorizontalAlign="Center" />
+                    <asp:BoundField DataField="TotalCancel" HeaderText="LOI Cancelled" HeaderStyle-CssClass="gridheader" ItemStyle-HorizontalAlign="Center" />
+                </Columns>
+            </asp:GridView>
+                        </div>
+                 </div>
+             </div>
+            </div>
+         </div>
+
 </asp:Content>

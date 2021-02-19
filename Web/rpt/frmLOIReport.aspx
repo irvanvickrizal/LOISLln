@@ -119,6 +119,7 @@
                         <asp:ListItem Text="LOI Open" Value="LOI Open"></asp:ListItem>
                         <asp:ListItem Text="LOI Overdue" Value="LOI Overdue"></asp:ListItem>
                         <asp:ListItem Text="LOI Cancelled" Value="LOI Cancelled"></asp:ListItem>
+                        <asp:ListItem Text="LOI Closed" Value="LOI Closed"></asp:ListItem> <%-- Yunita 13/11/20 add new report as request by ISAT NPO WCC Controller--%>
                     </asp:DropDownList>
                 </div>
             </div>
@@ -173,6 +174,8 @@
                             <asp:BoundField DataField="LOI_Status" HeaderText="Status LOI" HeaderStyle-CssClass="gridheader" ItemStyle-HorizontalAlign="Center" />
                             <asp:BoundField DataField="PIC" HeaderText="PIC/Approval Location" HeaderStyle-CssClass="gridheader" ItemStyle-HorizontalAlign="Center" />
                             <asp:BoundField DataField="Aging" HeaderText="Aging" HeaderStyle-CssClass="gridheader" ItemStyle-HorizontalAlign="Center" />
+                            
+                            
                             <asp:TemplateField HeaderStyle-CssClass="gridheader">
                                 <ItemTemplate>
                                     <div style="width: 100%; text-align: center;">

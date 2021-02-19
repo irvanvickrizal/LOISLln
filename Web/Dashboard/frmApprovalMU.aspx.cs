@@ -41,6 +41,7 @@ public partial class Dashboard_frmApprovalMU : System.Web.UI.Page
     {
         DataTable dt = loiControllerr.LOI_Overdue(hdnprojectname.Value);
         gvListLOIOverdue.DataSource = dt;
+        gvListLOIOverdue.PageIndex = pgIndex;
         gvListLOIOverdue.DataBind();
 
     }  
@@ -59,44 +60,20 @@ public partial class Dashboard_frmApprovalMU : System.Web.UI.Page
 
     protected void gvLOIData_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
+       
         BindData(e.NewPageIndex);
     }
 
-    protected void btnSubmitReject_Click(object sender, EventArgs e)
+    protected void gvListLOIOverdue_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
-        if (string.IsNullOrEmpty(txtReasonRejection.Value))
-        {
-            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), Guid.NewGuid().ToString(), "alert('Remarks rejection is empty');", true);
-            return;
-        }
-
-        int RequestId = int.Parse(Request.QueryString["RequestId"]);
-        if (loiControllerr.LOI_Update_Approval_Status(RequestId, false, "MU", txtReasonRejection.Value))
-        {
-            try
-            {
-                SendEmailRejected(RequestId);
-            }
-            catch (Exception ex)
-            {
-
-            }
-            finally
-            {
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), Guid.NewGuid().ToString(), "alert('LOI has been Rejected Successfully'); location.href = '../dashboard/frmListLOIMU.aspx';", true);
-            }
-        }
-        else
-        {
-            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), Guid.NewGuid().ToString(), "alert('Failed to Rejected LOI');", true);
-        }
+        BindDataOverdue(e.NewPageIndex);
     }
-
+    
     protected void btnApprove_Click(object sender, EventArgs e)
     {
         string ApproverRole = ContentSession.RoleID == 6 ? "MU" : "MB";
         int RequestId = int.Parse(Request.QueryString["RequestId"]);
-        if (loiControllerr.LOI_Update_Approval_Status(RequestId, true, ApproverRole, ""))
+        if (loiControllerr.LOI_Update_Approval_Status(RequestId, true, ApproverRole, "",txtApproveNote.Value))
         {
             try
             {
@@ -117,6 +94,38 @@ public partial class Dashboard_frmApprovalMU : System.Web.UI.Page
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), Guid.NewGuid().ToString(), "alert('Failed to Approved LOI');", true);
         }
     }
+
+
+    protected void btnSubmitReject_Click(object sender, EventArgs e)
+    {
+        if (string.IsNullOrEmpty(txtReasonRejection.Value))
+        {
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), Guid.NewGuid().ToString(), "alert('Remarks rejection is empty');", true);
+            return;
+        }
+
+        int RequestId = int.Parse(Request.QueryString["RequestId"]);
+        if (loiControllerr.LOI_Update_Approval_Status(RequestId, false, "MU", txtReasonRejection.Value,txtApproveNote.Value))
+        {
+            try
+            {
+                SendEmailRejected(RequestId);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), Guid.NewGuid().ToString(), "alert('LOI has been Rejected Successfully'); location.href = '../dashboard/frmListLOIMU.aspx';", true);
+            }
+        }
+        else
+        {
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), Guid.NewGuid().ToString(), "alert('Failed to Rejected LOI');", true);
+        }
+    }
+
 
     private void bindSuppDoc()
     {
@@ -144,11 +153,6 @@ public partial class Dashboard_frmApprovalMU : System.Web.UI.Page
     protected void gvListLOIOverdue_RowCommand(object sender, GridViewCommandEventArgs e)
     {
 
-    }
-
-    protected void gvListLOIOverdue_PageIndexChanging(object sender, GridViewPageEventArgs e)
-    {
-        BindDataOverdue(e.NewPageIndex);
     }
 
     protected void gvListLOIOverdue_RowDataBound(object sender, GridViewRowEventArgs e)

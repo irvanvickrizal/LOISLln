@@ -133,6 +133,8 @@ namespace eLoi.DataAccess
 
             return CustomExecuteCommand.ExecuteReaderDT(Command, Connection, "LOIDataAccess:LOI_get_Uploaded", "usp_LOI_get_Uploaded");
         }
+
+
         public DataTable LOI_Detail_by_RequestId(int RequestId)
         {
             Command = new SqlCommand("usp_LOI_Detail_by_RequestId", Connection);
@@ -394,6 +396,48 @@ namespace eLoi.DataAccess
             SqlParameter prm_lmby = new SqlParameter("@lmby", SqlDbType.Int);
             prm_lmby.Value = ContentSession.USERID;
             Command.Parameters.Add(prm_lmby);
+
+            if (!string.IsNullOrEmpty(Reject_Remarks))
+            {
+                SqlParameter prm_Reject_Remarks = new SqlParameter("@Reject_Remarks", SqlDbType.VarChar);
+                prm_Reject_Remarks.Value = Reject_Remarks;
+                Command.Parameters.Add(prm_Reject_Remarks);
+            }
+
+            return CustomExecuteCommand.ExecuteNonQuery(Command, Connection, "LOIDataAccess:LOI_Update_Approval_Status", "usp_LOI_Update_Approval_Status");
+        }
+
+        public bool LOI_Update_Approval_Status(int RequestId, bool isApprove, string ApproverRole, string Reject_Remarks,string Note)
+        {
+            Command = new SqlCommand("usp_LOI_Update_Approval_Status", Connection);
+            Command.CommandType = CommandType.StoredProcedure;
+
+
+            SqlParameter prm_RequestId = new SqlParameter("@RequestId", SqlDbType.BigInt);
+            prm_RequestId.Value = RequestId;
+            Command.Parameters.Add(prm_RequestId);
+
+            SqlParameter prm_isApprove = new SqlParameter("@isApprove", SqlDbType.Bit);
+            prm_isApprove.Value = isApprove;
+            Command.Parameters.Add(prm_isApprove);
+
+            SqlParameter prm_ApproverRole = new SqlParameter("@ApproverRole", SqlDbType.VarChar, 50);
+            prm_ApproverRole.Value = ApproverRole;
+            Command.Parameters.Add(prm_ApproverRole);
+
+            SqlParameter prm_lmby = new SqlParameter("@lmby", SqlDbType.Int);
+            prm_lmby.Value = ContentSession.USERID;
+            Command.Parameters.Add(prm_lmby);
+
+
+            if (!string.IsNullOrEmpty(Note))
+            {
+                SqlParameter prm_Note = new SqlParameter("@Note", SqlDbType.VarChar,5000);
+                prm_Note.Value = Note;
+                Command.Parameters.Add(prm_Note);
+            }
+
+
 
             if (!string.IsNullOrEmpty(Reject_Remarks))
             {
@@ -1163,6 +1207,37 @@ namespace eLoi.DataAccess
             Command.Parameters.Add(prm_ProjectName);
 
             return CustomExecuteCommand.ExecuteReaderDT(Command, Connection, "LOIDataAccess:getTasklistSummary_Report", "usp_getTasklistSummary_Report");
+        }
+
+
+        public DataTable getLOISummary_Count()
+        {
+            Command = new SqlCommand("usp_LOISummaryCount", Connection);
+            Command.CommandType = CommandType.StoredProcedure;
+
+            SqlParameter prm_userId = new SqlParameter("@userid", SqlDbType.Int);
+            prm_userId.Value = ContentSession.USERID;
+            Command.Parameters.Add(prm_userId);
+            SqlParameter prm_ProjectName = new SqlParameter("@ProjectName", SqlDbType.VarChar, 50);
+            prm_ProjectName.Value = ContentSession.CTName;
+            Command.Parameters.Add(prm_ProjectName);
+
+            return CustomExecuteCommand.ExecuteReaderDT(Command, Connection, "LOIDataAccess:getLOISummary_Count", "usp_LOISummaryCount");
+        }
+
+        public DataTable getLOISummary_Detail()
+        {
+            Command = new SqlCommand("usp_LOISummaryDetail", Connection);
+            Command.CommandType = CommandType.StoredProcedure;
+
+            SqlParameter prm_userId = new SqlParameter("@userid", SqlDbType.Int);
+            prm_userId.Value = ContentSession.USERID;
+            Command.Parameters.Add(prm_userId);
+            SqlParameter prm_ProjectName = new SqlParameter("@ProjectName", SqlDbType.VarChar, 50);
+            prm_ProjectName.Value = ContentSession.CTName;
+            Command.Parameters.Add(prm_ProjectName);
+
+            return CustomExecuteCommand.ExecuteReaderDT(Command, Connection, "LOIDataAccess:getLOISummary_Detail", "usp_LOISummaryDetail");
         }
 
         public DataTable report_loi_done_detail_getdata(int subconid, string periodfrom, string periodto, string siteid, string cpo, int reqid)

@@ -128,10 +128,19 @@ public partial class Dashboard_frmMUApprovalRejected : System.Web.UI.Page
         BindDataOverdue(e.NewPageIndex);
     }
 
+    //private void BindDataOverdue(int pgIndex = 0)
+    //{
+    //    DataTable dt = loiControllerr.LOI_Overdue();
+    //    gvListLOIOverdue.DataSource = dt;
+    //    gvListLOIOverdue.DataBind();
+
+    //}
+
     private void BindDataOverdue(int pgIndex = 0)
     {
-        DataTable dt = loiControllerr.LOI_Overdue();
+        DataTable dt = loiControllerr.LOI_Overdue(hdnprojectname.Value);
         gvListLOIOverdue.DataSource = dt;
+        gvListLOIOverdue.PageIndex = pgIndex;
         gvListLOIOverdue.DataBind();
 
     }

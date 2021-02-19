@@ -112,20 +112,30 @@
         <ContentTemplate>
             <div class="text-right">
                 <div class="form-inline">
-                    <%--                    <asp:LinkButton ID="lbLOIOverdue" runat="server" Text="Total LOI Over Due: 0" OnClick="lbLOIOverdue_Click" Enabled="false"></asp:LinkButton>--%>
+                    <%--<asp:LinkButton ID="lbLOIOverdue" runat="server" Text="Total LOI Over Due: 0" OnClick="lbLOIOverdue_Click" Enabled="false"></asp:LinkButton>--%>
                     <asp:Button ID="btnApprove" runat="server" Text="Approve" CssClass="btn btn-info" OnClick="btnApprove_Click" />
                     <button type="button" title="Reject" class="btn btn-danger" data-toggle="modal" data-target="#pnlRejection" id="btnRejectAll">Reject</button>
+                    
                 </div>
             </div>
             <div class="clearfix"></div>
             <h4></h4>
+
+             <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <%--<i class="fa fa-tasks fa-fw"></i>--%>Note
+                </div>
+                <div class="panel-body">
+                    <textarea class="form-control" rows="2" id="txtApproveNote" runat="server"></textarea>
+                </div>
+            </div>
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <i class="fa fa-tasks fa-fw"></i>LOI Overdue
                 </div>
                 <div class="panel-body">
                     <div class="form-group">
-                        <asp:GridView ID="gvListLOIOverdue" runat="server" AutoGenerateColumns="false" AllowPaging="true" PageSize="30" CssClass="Grid" Width="100%" OnRowCommand="gvListLOIOverdue_RowCommand"
+                        <asp:GridView ID="gvListLOIOverdue" runat="server" AutoGenerateColumns="false" AllowPaging="true" PageSize="10" CssClass="Grid" Width="100%" OnRowCommand="gvListLOIOverdue_RowCommand"
                             EmptyDataText="No Data Recorded" Font-Size="13px" OnRowDataBound="gvListLOIOverdue_RowDataBound" OnPageIndexChanging="gvListLOIOverdue_PageIndexChanging">
                             <EmptyDataRowStyle CssClass="alert-warning" ForeColor="Red" />
                             <HeaderStyle CssClass="gridheader" />
@@ -138,7 +148,13 @@
                                         </div>  
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:BoundField DataField="workpackageid" HeaderText="workpackageid" />
+                                <asp:BoundField DataField="loi_code" HeaderText="LOI Request No" /> <%--Yunita 21/09/20 to change overdue detail to summary as requested by user BE--%>
+                                <asp:BoundField DataField="TotalSites" HeaderText="Total Site" />
+                                <asp:BoundField DataField="TotalPrice" HeaderText="Total Price" DataFormatString="{0:n0}" />
+                                <asp:BoundField DataField="Aging" HeaderText="Overdue Aging (Days)" />
+
+
+                                <%--<asp:BoundField DataField="workpackageid" HeaderText="workpackageid" />
                                 <asp:BoundField DataField="Customer_PO" HeaderText="Customer PO" />
                                 <asp:BoundField DataField="Customer_PO_Date" HeaderText="Customer PO Date" DataFormatString="{0:dd-MMM-yyyy}"/>
                                 <asp:BoundField DataField="PO_Description" HeaderText="PO Description" />
@@ -150,7 +166,7 @@
                                 <asp:BoundField DataField="Unit_Price" HeaderText="Unit Price" DataFormatString="{0:n0}" />
                                 <asp:BoundField DataField="Qty" HeaderText="Qty" />
                                 <asp:BoundField DataField="Total_Price" HeaderText="Total Price" DataFormatString="{0:n0}" />
-                                <asp:BoundField DataField="Currency" HeaderText="Currency" />
+                                <asp:BoundField DataField="Currency" HeaderText="Currency" />--%>
                             </Columns>
                         </asp:GridView>
                     </div>
@@ -232,6 +248,8 @@
                     <asp:TextBox type="text" CssClass="form-control " runat="server" ID="txtPlanClossingDate" ReadOnly="true" Font-Size="14px" />
                 </div>
             </div>
+             
+
         </ContentTemplate>
         <Triggers>
             <asp:PostBackTrigger ControlID="gvLOIData" />
@@ -259,5 +277,6 @@
             </div>
         </div>
     </div>
+     
 
 </asp:Content>
