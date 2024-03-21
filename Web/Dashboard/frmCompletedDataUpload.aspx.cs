@@ -288,8 +288,16 @@ public partial class Dashboard_frmCompletedDataUpload : System.Web.UI.Page
             if (scope_type_id == 0)
                 ErrorMessage += "Scope of Work is not valid registerd; ";
 
-            if (loiControllerr.LOIDetail_Checking_duplicate_sow_siteid_byReqno(reqid, dr["Site_ID"].ToString(), dr["ScopeOfWork"].ToString()))
-                ErrorMessage += "Scope of Work duplicate in same siteid; ";
+            //Comment  by Yunita 21 Maret 2024 due to requirement changed
+            //if (loiControllerr.LOIDetail_Checking_duplicate_sow_siteid_byReqno(reqid, dr["Site_ID"].ToString(), dr["ScopeOfWork"].ToString()))
+            //    ErrorMessage += "Scope of Work duplicate in same site ID; ";
+
+            //ErrorMessage += loiControllerr.LOIDetail_validate(dr["Site_ID"].ToString(), Subcon_Id, dr["ScopeOfWork"].ToString(), dr["Subcone_Name"].ToString());
+
+            //Change by Yunita 21 Maret 2024 due to requirement changed
+
+            if (loiControllerr.LOIDetail_Checking_duplicate_sow_siteid_byReqno(reqid, dr["workpackageid"].ToString(), dr["ScopeOfWork"].ToString()))
+                ErrorMessage += "Scope of Work duplicate in same SMPID; ";
 
             ErrorMessage += loiControllerr.LOIDetail_validate(dr["workpackageid"].ToString(), Subcon_Id, dr["ScopeOfWork"].ToString(), dr["Subcone_Name"].ToString());
         }

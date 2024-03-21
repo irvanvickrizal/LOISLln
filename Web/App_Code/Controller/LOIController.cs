@@ -234,9 +234,17 @@ namespace eLoi.Controller
             return da.Validate_sowdetail(detail_sow);
         }
 
-        public bool LOIDetail_Checking_duplicate_sow_siteid_byReqno(int RequestId, string Site_ID, string ScopeOfWork)
+        // Comment  by Yunita 21 Maret 2024 due to requirement changed
+        //public bool LOIDetail_Checking_duplicate_sow_siteid_byReqno(int RequestId, string Site_ID, string ScopeOfWork)
+        //{
+        //    return da.LOIDetail_Checking_duplicate_sow_siteid_byReqno(RequestId, Site_ID, ScopeOfWork);
+        //}
+
+        //Change by Yunita 21 Maret 2024 due to requirement changed
+
+        public bool LOIDetail_Checking_duplicate_sow_siteid_byReqno(int RequestId, string Workpackageid, string ScopeOfWork)
         {
-            return da.LOIDetail_Checking_duplicate_sow_siteid_byReqno(RequestId, Site_ID, ScopeOfWork);
+            return da.LOIDetail_Checking_duplicate_sow_siteid_byReqno(RequestId, Workpackageid, ScopeOfWork);
         }
 
         public DataTable boq_price_getNotAvailable(int RequestId)

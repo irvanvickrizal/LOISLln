@@ -963,7 +963,7 @@ namespace eLoi.DataAccess
             return dtResult;
         }
 
-        public bool LOIDetail_Checking_duplicate_sow_siteid_byReqno(int RequestId, string Site_ID, string ScopeOfWork)
+        public bool LOIDetail_Checking_duplicate_sow_siteid_byReqno(int RequestId, string Workpackageid, string ScopeOfWork)
         {
             Command = new SqlCommand("usp_LOIDetail_Checking_duplicate_sow_siteid_byReqno", Connection);
             Command.CommandType = CommandType.StoredProcedure;
@@ -972,9 +972,16 @@ namespace eLoi.DataAccess
             prm_RequestId.Value = RequestId;
             Command.Parameters.Add(prm_RequestId);
 
-            SqlParameter prm_Site_ID = new SqlParameter("@Site_ID", SqlDbType.VarChar, 20);
-            prm_Site_ID.Value = Site_ID;
-            Command.Parameters.Add(prm_Site_ID);
+            //Comment by Yunita 21 Maret 2024 due to requirement changed
+            //SqlParameter prm_Site_ID = new SqlParameter("@Site_ID", SqlDbType.VarChar, 20);
+            //prm_Site_ID.Value = Site_ID;
+            //Command.Parameters.Add(prm_Site_ID);
+
+            //Change by Yunita 21 Maret 2024 due to requirement changed
+
+            SqlParameter prm_Site_ID = new SqlParameter("@workpackageid", SqlDbType.VarChar, 50);
+            prm_Workpackageid.Value = Workpackageid;
+            Command.Parameters.Add(prm_Workpackageid);
 
             SqlParameter prm_ScopeOfWork = new SqlParameter("@ScopeOfWork", SqlDbType.VarChar, 500);
             prm_ScopeOfWork.Value = ScopeOfWork;
